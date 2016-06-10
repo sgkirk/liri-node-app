@@ -55,8 +55,11 @@ function myTweets(){
 	var params = {screen_name: 'therealmochi', count: 20};
 	
 	client.get('statuses/user_timeline', params, function(error, tweets, response){
-  		if (!error) {
-    		console.log(tweets);
+
+			for (var prop in tweets){
+   				console.log(tweets[prop].text);
+   				console.log(tweets[prop].created_at);
+   				console.log();
   			}
 	});
 
