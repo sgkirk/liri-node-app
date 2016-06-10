@@ -4,6 +4,9 @@ var twitter = require('twitter');
 var keys = require('./keys.js');
 var keysTwitter = keys.twitterKeys;
 
+var spotify = require('spotify');
+
+
 
 
 
@@ -18,6 +21,7 @@ var keysTwitter = keys.twitterKeys;
 // do-what-it-says
 
 var action = process.argv[2];
+var value = process.argv[3];
 
 switch(action){
     case 'my-tweets':
@@ -60,18 +64,9 @@ function myTweets(){
    				console.log(tweets[prop].text);
    				console.log(tweets[prop].created_at);
    				console.log();
-  			}
+   			}
 	});
-
 }
-
-
-
- 
-
-
-
-
 
 
 // node liri.js spotify-this-song '<song name here>'
@@ -84,6 +79,21 @@ function myTweets(){
 // song name
 // if no song is provided then your program will default to
 // "what's my age again" by blink 182
+
+function spotifyThis(){
+
+	spotify.search({ type: 'track', query: value }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+    else{
+    	console.log(data.tracks.items[0].artists[0].name);
+    }
+
+});
+
+}
 
 
 // node liri.js movie-this '<movie name here>'
